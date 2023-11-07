@@ -1,14 +1,12 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
-import javax.swing.*;
-import java.awt.*;
-
-public class Slang_Dictionary extends JPanel{
-    public static TreeMap<String, Set<String>> data;
-    public static Vector<String> history;
-    private static Scanner scan = new Scanner(System.in);
+public class Slang_Dictionary{
+    public static TreeMap<String, Set<String>> data = new TreeMap<String, Set<String>>();
+    public static Vector<String> history = new Vector<String>();
+    static Scanner scan = new Scanner(System.in);
+    static ProcessBuilder process = new ProcessBuilder("cmd", "/c", "cls");
 
     static void inputFile(String file) throws IOException{
         File f = new File(file);
@@ -46,13 +44,11 @@ public class Slang_Dictionary extends JPanel{
         save.close();
     }
 
-    public static void searchSlang(){
-        System.out.println();
+    public static void searchSlang() throws IOException, InterruptedException{
+        process.inheritIO().start().waitFor();
         System.out.print("Enter slang word that you want to search: ");
         String line = scan.nextLine().trim().toUpperCase();
         //addHistory(word);
-
-        Boolean flag = false;
 
         Set<String> def = data.get(line);
         if (def == null){
@@ -60,82 +56,47 @@ public class Slang_Dictionary extends JPanel{
             for(Map.Entry<String,Set<String>> word: dictionary){
                 String w = word.getKey();
                 if (w.contains(line.toUpperCase())){
-                    flag = true;
-                    System.out.println("\t" + "+ " + w + ": " + word.getKey());
+                    System.out.println("\t" + "+ " + w);
                 }
             }
 
-            if (!flag)
-                System.out.println("Word does not exist!");
+            System.out.println("The word " + line + " does not exist!");
         }
         else {
             System.out.println("Had found!");
-            System.out.println("\t" + "+ " + line + ": " + def);
+            System.out.println("\t" + "+ " + line + " is " + def);
         }
     }
 
-    public Slang_Dictionary(){
-        setLayout(new BorderLayout());
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new FlowLayout());
-        JLabel label = new JLabel("Search");
-        JTextField searchField = new JTextField("Search a slang word or a definition");
-        searchField.setPreferredSize(searchField.getPreferredSize());
-        
-        topPanel.add(label);
-        topPanel.add(searchField);
+    public static void searchDefinition() throws IOException, InterruptedException{
+        process.inheritIO().start().waitFor();
+        System.out.print("Enter definition you want to search: ");
+        String def = scan.nextLine().trim();
 
-        add(topPanel, BorderLayout.WEST);
+        Boolean flag = false;
+        Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+        for(Map.Entry<String,Set<String>> word: dictionary){
+            Set<String> defList = word.getValue();
+            for(String i : defList){
+                if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
+                    flag = true;
+                    System.out.println("\t" + "+ " + i);
+                }
+            }
+        }
 
-        /*String[] all_words = new String[words.size()];
-        JList<String> wordList = new JList<>(words.toArray(all_words));
-        JScrollPane wordPane = new JScrollPane(wordList);*/
-
-        //add(wordPane, BorderLayout.CENTER);
-
-        JPanel bottomPanel1 = new JPanel();
-        bottomPanel1.setLayout(new BoxLayout(bottomPanel1, BoxLayout.LINE_AXIS));
-        JButton ok = new JButton("OK");
-        JButton cancel = new JButton("Cancel");
-        bottomPanel1.add(ok);
-        bottomPanel1.add(Box.createRigidArea(new Dimension(30, 0)));
-        bottomPanel1.add(cancel);
-
-        JPanel bottomPanel2 = new JPanel();
-        bottomPanel2.setLayout(new BoxLayout(bottomPanel2, BoxLayout.PAGE_AXIS));
-        bottomPanel2.add(Box.createRigidArea(new Dimension(0, 5)));
-        bottomPanel2.add(bottomPanel1);
-        bottomPanel2.add(Box.createRigidArea(new Dimension(0, 5)));
-
-        add(bottomPanel2, BorderLayout.PAGE_END);
+        if(!flag){
+            System.out.println("Can not find Slang Word has this definition!");
+        }
     }
 
-    private static void createAndShowGUI() {
-        //Make sure we have nice window decorations.
-        JFrame.setDefaultLookAndFeelDecorated(true);
-
-        //Create and set up the window.
-        JFrame frame = new JFrame("Slang_Dictionary");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new Slang_Dictionary();
-        
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    
-    public static void main(String [] args) throws IOException{
+    public static void main(String [] args) throws IOException, InterruptedException{
         inputFile("MyDictionary.txt");
-        
+
         String choice;
 
         while(true){
+            process.inheritIO().start().waitFor();
 			System.out.println();
 			System.out.println("1. Search by slang word");
 			System.out.println("2. Search slang word follow definition");
@@ -151,8 +112,16 @@ public class Slang_Dictionary extends JPanel{
 			System.out.print("Choose your action: ");
 			choice = scan.nextLine();
 
-            if (choice.equals("1"))
+            if (choice.equals("1")){
                 searchSlang();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("2")){
+                searchDefinition();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
             else 
                 break;
         }
