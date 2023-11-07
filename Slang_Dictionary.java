@@ -253,6 +253,47 @@ public class Slang_Dictionary{
         return word;
     }
 
+    public static void slangWordQuiz() throws IOException, InterruptedException{
+        TreeMap<String, Set<String>> quiz = new TreeMap<String, Set<String>>();
+        for(int i = 0; i < 4; i++){
+            String word = onThisDaySlang(true);
+            quiz.put(word, data.get(word));
+        }
+        int randomAnswers = new Random().nextInt(4);
+
+        List<String> keysArray = new ArrayList<String>(quiz.keySet());
+        String question = keysArray.get(randomAnswers);
+
+        System.out.println();
+        System.out.println("Welcome to slang word quiz");
+        System.out.println("Choose definition of this slang word: " + question);
+
+        int i = 0;
+        Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
+        for(Map.Entry<String, Set<String>> item: q){
+            if (i % 2 == 0)
+                System.out.print((char)(i + 65) + ". " + item.getValue().iterator().next() + "\t\t\t");
+            else 
+                System.out.println((char)(i + 65) + ". " + item.getValue().iterator().next());
+            ++i;
+        }
+
+        String str = "";
+        while (!str.matches("[ABCD]{1}")) {
+            System.out.print("Choose correct answer (A, B, C or D): ");
+            str = scan.nextLine();
+        }
+        int choice = Integer.parseInt(str) - 65;
+
+        if (choice == randomAnswers)
+            System.out.println("Correct Answer! Congratulation!!!");
+        else {
+            char answers = (char)(randomAnswers + 65);
+            System.out.println("Incorrect! Good luck for next time!");
+            System.out.println("Correct answer is: " + answers + ". " + quiz.get(question));
+        }
+    }
+
     public static void main(String [] args) throws IOException, InterruptedException{
         inputFile("MyDictionary.txt");
         inputHistory();
@@ -312,6 +353,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("8")){
                 onThisDaySlang(false);
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("9")){
+                slangWordQuiz();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
