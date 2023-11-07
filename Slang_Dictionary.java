@@ -1,11 +1,13 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Slang_Dictionary extends JPanel{
-    static HashSet<String> words = new HashSet<String>();
-    static HashSet<String> difination = new HashSet<String>();
+    public static TreeMap<String, Set<String>> data;
+    public static Vector<String> history;
 
     static void inputFile(String file) throws IOException{
         File f = new File(file);
@@ -15,11 +17,32 @@ public class Slang_Dictionary extends JPanel{
         String line = in.readLine();
         while(line != null){
             String[] str = line.split("`");
-            words.add(str[0]);
-            difination.add(str[1]);
+            if(str.length == 2){
+                String[] definition = str[1].split("\\|");
+                Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
+                data.put(str[0], def);
+            }
             line = in.readLine();
         }
         in.close();
+    }
+
+    static void saveDictionary() throws IOException{
+        FileWriter save = new FileWriter(new File("MyDictionary.txt"));
+        Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+        for(Map.Entry<String, Set<String>> word : dictionary){
+            save.write(word.getKey() + "`");
+            Set<String> definition = word.getValue();
+            String lastDef = definition.stream().reduce((a, b) -> b).get();
+            for (String def : definition){
+                if (def.equals(lastDef))
+                    save.write(def + "\n");
+                else 
+                    save.write(def + "| ");
+            }
+        };
+
+        save.close();
     }
 
     public Slang_Dictionary(){
@@ -79,7 +102,7 @@ public class Slang_Dictionary extends JPanel{
 
     
     public static void main(String [] args) throws IOException{
-        createAndShowGUI();
         inputFile("slang.txt");
+        createAndShowGUI();
     }
 }
