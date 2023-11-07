@@ -147,9 +147,8 @@ public class Slang_Dictionary{
         }
         int c = Integer.parseInt(numOfDef);
 
-        for (int i = 0; i < c; ++i){
-            int k = i + 1;
-            System.out.print("Enter " + k + "st definition: ");
+        for (int i = 1; i <= c; ++i){
+            System.out.print("Enter definition " + i + ": ");
             definition.add(scan.nextLine());
         }
 
@@ -160,7 +159,51 @@ public class Slang_Dictionary{
         else
             return;
 
-        System.out.println("Add new slang word success!");
+        System.out.println("Adding the new slang word is success!");
+        saveDictionary();
+    }
+
+    public static void editSlangWord() throws IOException, InterruptedException{
+        Set<String> definition = new HashSet<String>();
+        process.inheritIO().start().waitFor();
+        System.out.print("Enter a slang word that you want to edit: ");
+        String word = scan.nextLine().trim().toUpperCase();
+
+        if (!data.containsKey(word)){
+            System.out.println("Word does not exist!");
+            return;
+        }
+        else 
+            System.out.println(word + " is " + data.get(word));
+
+        String choice;
+        System.out.println("1. Add more definition for slang word");
+        System.out.println("2. Create new definition for slang word");
+        System.out.print("Enter your choice: ");
+        choice = scan.nextLine();
+
+        System.out.println();
+        String numOfDef = "";
+        while(!numOfDef.matches("^\\d+$")){
+            System.out.print("Enter number of definition of slang word you want to add: ");
+            scan.nextLine();
+        }
+        int c = Integer.parseInt(scan.nextLine());
+
+        for (int i = 1; i <= c; ++i){
+            System.out.print("Enter definition " + i + ": ");
+            definition.add(scan.nextLine());
+        }
+        
+        if (choice.equals("1"))
+            definition.addAll(data.get(word));
+        else if (choice.equals("2"))
+            data.put(word.toLowerCase(), definition);
+        else 
+            return;
+
+        data.put(word, definition);
+        System.out.println("Editing the slang word is success!");
         saveDictionary();
     }
 
@@ -203,6 +246,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("4")){
                 addSlangWord();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("5")){
+                editSlangWord();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
