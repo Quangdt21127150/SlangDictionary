@@ -283,7 +283,7 @@ public class Slang_Dictionary{
             System.out.print("Choose correct answer (A, B, C or D): ");
             str = scan.nextLine();
         }
-        int choice = Integer.parseInt(str) - 65;
+        int choice = (int)str.toCharArray()[0] - 65;
 
         if (choice == randomAnswers)
             System.out.println("Correct Answer! Congratulation!!!");
