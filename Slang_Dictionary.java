@@ -115,7 +115,8 @@ public class Slang_Dictionary{
         saveHistory();
     }
 
-    public static void printHistory(){
+    public static void printHistory() throws IOException, InterruptedException{
+        process.inheritIO().start().waitFor();
         if (history.isEmpty())
             System.out.println("History is empty");
         else 
@@ -141,9 +142,9 @@ public class Slang_Dictionary{
         
         System.out.println();
         String numOfDef = "";
-        while(!numOfDef.matches("^\\d+$")){
+        while(!numOfDef.matches("[0-9]{1,}")){
             System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
-            scan.nextLine();
+            numOfDef = scan.nextLine();
         }
         int c = Integer.parseInt(numOfDef);
 
@@ -184,9 +185,9 @@ public class Slang_Dictionary{
 
         System.out.println();
         String numOfDef = "";
-        while(!numOfDef.matches("^\\d+$")){
+        while(!numOfDef.matches("[0-9]{1,}")){
             System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
-            scan.nextLine();
+            numOfDef = scan.nextLine();
         }
         int c = Integer.parseInt(numOfDef);
 
@@ -204,6 +205,31 @@ public class Slang_Dictionary{
 
         data.put(word, definition);
         System.out.println("Editing the slang word is success!");
+        saveDictionary();
+    }
+
+    public static void deleteSlangWord() throws IOException, InterruptedException{
+        process.inheritIO().start().waitFor();
+        System.out.print("Enter a slang word that you want to delete: ");
+        String word = scan.nextLine().trim().toUpperCase();
+
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        System.out.print("Are you sure to delete word?: ");
+
+        String choice = scan.nextLine();
+        if (choice.equals("1")){
+            if (data.remove(word) == null)
+                System.out.println("Word does not exist");
+            else 
+                System.out.println("Deleting is success!");
+        }
+        else if (choice.equals("2"))
+            return;
+        else {
+            System.out.println("Invalid choice!");
+            return;
+        }
         saveDictionary();
     }
 
@@ -251,6 +277,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("5")){
                 editSlangWord();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("6")){
+                deleteSlangWord();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
