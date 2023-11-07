@@ -4,11 +4,11 @@ import java.util.stream.*;
 
 public class Slang_Dictionary{
     public static TreeMap<String, Set<String>> data = new TreeMap<String, Set<String>>();
-    public static Vector<String> history = new Vector<String>();
+    public static Vector<String> history;
     static Scanner scan = new Scanner(System.in);
     static ProcessBuilder process = new ProcessBuilder("cmd", "/c", "cls");
 
-    static void inputFile(String file) throws IOException{
+    public static void inputFile(String file) throws IOException{
         File f = new File(file);
         if(!f.exists())
             return;
@@ -26,7 +26,7 @@ public class Slang_Dictionary{
         in.close();
     }
 
-    static void saveDictionary() throws IOException{
+    public static void saveDictionary() throws IOException{
         FileWriter save = new FileWriter(new File("MyDictionary.txt"));
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
         for(Map.Entry<String, Set<String>> word : dictionary){
@@ -47,30 +47,30 @@ public class Slang_Dictionary{
     public static void searchSlang() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
         System.out.print("Enter slang word that you want to search: ");
-        String line = scan.nextLine().trim().toUpperCase();
-        //addHistory(word);
+        String input = scan.nextLine().trim().toUpperCase();
+        addHistory(input);
 
-        Set<String> def = data.get(line);
+        Set<String> def = data.get(input);
         if (def == null){
             Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
             for(Map.Entry<String,Set<String>> word: dictionary){
                 String w = word.getKey();
-                if (w.contains(line.toUpperCase())){
+                if (w.contains(input.toUpperCase())){
                     System.out.println("\t" + "+ " + w);
                 }
             }
 
-            System.out.println("The word " + line + " does not exist!");
+            System.out.println("The word " + input + " does not exist!");
         }
         else {
             System.out.println("Had found!");
-            System.out.println("\t" + "+ " + line + " is " + def);
+            System.out.println("\t" + "+ " + input + " is " + def);
         }
     }
 
     public static void searchDefinition() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
-        System.out.print("Enter definition you want to search: ");
+        System.out.print("Enter definition that you want to search: ");
         String def = scan.nextLine().trim();
 
         Boolean flag = false;
@@ -80,13 +80,49 @@ public class Slang_Dictionary{
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
                     flag = true;
-                    System.out.println("\t" + "+ " + i);
+                    System.out.println("\t" + "+ " + word.getKey());
+                    break;
                 }
             }
         }
 
         if(!flag){
             System.out.println("Can not find Slang Word has this definition!");
+        }
+    }
+
+    private static void inputHistory() throws IOException{
+        history = new Vector<String>();
+
+        BufferedReader line = new BufferedReader(new FileReader(new File("History.txt")));
+        String word;
+        while((word = line.readLine()) != null){
+            history.add(word);
+        }  
+        line.close();  
+    }
+
+    private static void saveHistory() throws IOException{
+        FileWriter save = new FileWriter(new File("History.txt"));
+        for (String word : history){
+            save.write(word + "\n");
+        }
+        save.close();
+    }
+
+    public static void addHistory(String word) throws IOException{
+        history.add(word);
+        saveHistory();
+    }
+
+    public static void printHistory(){
+        if (history.isEmpty()){
+            System.out.println("History is empty");
+        }
+        else {
+            for(String word : history){
+                System.out.println("\t" + "+ " + word);
+            }
         }
     }
 
@@ -119,6 +155,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("2")){
                 searchDefinition();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("3")){
+                printHistory();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
