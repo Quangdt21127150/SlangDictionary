@@ -255,7 +255,7 @@ public class Slang_Dictionary{
 			System.out.println("4. Add new slang word");
 			System.out.println("5. Edit slang word");
 			System.out.println("6. Delete slang word");
-			System.out.println("7. Reset slang word Dictionary");
+			System.out.println("7. Reset slang word dictionary");
             System.out.println("8. On this day slang word");
             System.out.println("9. slang word quiz");
             System.out.println("10. slang word quiz follow definition");
@@ -290,6 +290,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("6")){
                 deleteSlangWord();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("7")){
+                resetDictionary();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
