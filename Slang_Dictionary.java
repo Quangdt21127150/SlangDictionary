@@ -142,7 +142,7 @@ public class Slang_Dictionary{
         System.out.println();
         String numOfDef = "";
         while(!numOfDef.matches("^\\d+$")){
-            System.out.print("Enter number of definition of slang word you want to add (it must be an integer): ");
+            System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
             scan.nextLine();
         }
         int c = Integer.parseInt(numOfDef);
@@ -185,10 +185,10 @@ public class Slang_Dictionary{
         System.out.println();
         String numOfDef = "";
         while(!numOfDef.matches("^\\d+$")){
-            System.out.print("Enter number of definition of slang word you want to add: ");
+            System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
             scan.nextLine();
         }
-        int c = Integer.parseInt(scan.nextLine());
+        int c = Integer.parseInt(numOfDef);
 
         for (int i = 1; i <= c; ++i){
             System.out.print("Enter definition " + i + ": ");
