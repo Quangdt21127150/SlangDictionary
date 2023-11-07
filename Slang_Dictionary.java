@@ -245,8 +245,8 @@ public class Slang_Dictionary{
         List<String> keysAsArray = new ArrayList<String>(data.keySet());
         Random random = new Random();
         String word = keysAsArray.get(random.nextInt(keysAsArray.size()));
+        process.inheritIO().start().waitFor();
         if (!quiz){
-            process.inheritIO().start().waitFor();
             System.out.println("On this day slang word!");
             System.out.println(word + " is " + data.get(word));
         }
