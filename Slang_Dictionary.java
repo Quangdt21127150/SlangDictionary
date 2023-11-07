@@ -241,6 +241,18 @@ public class Slang_Dictionary{
         System.out.println("Reset The Dictionary Success!");
     }
 
+    public static String onThisDaySlang(Boolean quiz) throws IOException, InterruptedException{
+        List<String> keysAsArray = new ArrayList<String>(data.keySet());
+        Random random = new Random();
+        String word = keysAsArray.get(random.nextInt(keysAsArray.size()));
+        if (!quiz){
+            process.inheritIO().start().waitFor();
+            System.out.println("On this day slang word!");
+            System.out.println(word + " is " + data.get(word));
+        }
+        return word;
+    }
+
     public static void main(String [] args) throws IOException, InterruptedException{
         inputFile("MyDictionary.txt");
         inputHistory();
@@ -252,13 +264,13 @@ public class Slang_Dictionary{
 			System.out.println("1. Search by slang word");
 			System.out.println("2. Search slang word follow definition");
 			System.out.println("3. Show Search History");
-			System.out.println("4. Add new slang word");
-			System.out.println("5. Edit slang word");
-			System.out.println("6. Delete slang word");
-			System.out.println("7. Reset slang word dictionary");
-            System.out.println("8. On this day slang word");
-            System.out.println("9. slang word quiz");
-            System.out.println("10. slang word quiz follow definition");
+			System.out.println("4. Add a new slang word");
+			System.out.println("5. Edit a slang word");
+			System.out.println("6. Delete a slang word");
+			System.out.println("7. Reset the slang word dictionary");
+            System.out.println("8. Random a slang word (On this day slang word)");
+            System.out.println("9. Slang word quiz");
+            System.out.println("10. Slang word quiz follow definition");
 			System.out.println("Choose difference key to exit");
 			System.out.print("Choose your action: ");
 			choice = scan.nextLine();
@@ -295,6 +307,11 @@ public class Slang_Dictionary{
             }
             else if (choice.equals("7")){
                 resetDictionary();
+                System.out.print("Choose any key to back to menu: ");
+                choice = scan.nextLine();
+            }
+            else if (choice.equals("8")){
+                onThisDaySlang(false);
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
