@@ -8,6 +8,7 @@ import java.awt.*;
 public class Slang_Dictionary extends JPanel{
     public static TreeMap<String, Set<String>> data;
     public static Vector<String> history;
+    private static Scanner scan = new Scanner(System.in);
 
     static void inputFile(String file) throws IOException{
         File f = new File(file);
@@ -45,6 +46,34 @@ public class Slang_Dictionary extends JPanel{
         save.close();
     }
 
+    public static void searchSlang(){
+        System.out.println();
+        System.out.print("Enter word you want to search: ");
+        String line = scan.nextLine().trim().toUpperCase();
+        //addHistory(word);
+
+        Boolean flag = false;
+
+        Set<String> def = data.get(line);
+        if (def == null){
+            Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+            for(Map.Entry<String,Set<String>> word: dictionary){
+                String w = word.getKey();
+                if (w.contains(line.toUpperCase())){
+                    flag = true;
+                    System.out.println("\t" + "+ " + w + ": " + word.getKey());
+                }
+            }
+
+            if (!flag)
+                System.out.println("Word does not exist!");
+        }
+        else {
+            System.out.println("Had found!");
+            System.out.println("\t" + "+ " + line + ": " + def);
+        }
+    }
+
     public Slang_Dictionary(){
         setLayout(new BorderLayout());
         JPanel topPanel = new JPanel();
@@ -58,11 +87,11 @@ public class Slang_Dictionary extends JPanel{
 
         add(topPanel, BorderLayout.WEST);
 
-        String[] all_words = new String[words.size()];
+        /*String[] all_words = new String[words.size()];
         JList<String> wordList = new JList<>(words.toArray(all_words));
-        JScrollPane wordPane = new JScrollPane(wordList);
+        JScrollPane wordPane = new JScrollPane(wordList);*/
 
-        add(wordPane, BorderLayout.CENTER);
+        //add(wordPane, BorderLayout.CENTER);
 
         JPanel bottomPanel1 = new JPanel();
         bottomPanel1.setLayout(new BoxLayout(bottomPanel1, BoxLayout.LINE_AXIS));
