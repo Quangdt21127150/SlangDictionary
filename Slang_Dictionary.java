@@ -233,6 +233,14 @@ public class Slang_Dictionary{
         saveDictionary();
     }
 
+    public static void resetDictionary() throws IOException, InterruptedException{
+        process.inheritIO().start().waitFor();
+        inputFile("slang.txt");
+        saveDictionary();
+        System.out.println();
+        System.out.println("Reset The Dictionary Success!");
+    }
+
     public static void main(String [] args) throws IOException, InterruptedException{
         inputFile("MyDictionary.txt");
         inputHistory();
