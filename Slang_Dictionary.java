@@ -19,7 +19,7 @@ public class Slang_Dictionary{
             if(str.length == 2){
                 String[] definition = str[1].split("\\|");
                 Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
-                data.put(str[0], def);
+                data.put(str[0].trim(), def);
             }
             line = in.readLine();
         }
@@ -137,20 +137,20 @@ public class Slang_Dictionary{
             System.out.println("1. Overwrite slang word");
             System.out.println("2. Duplicate to new slang word");
             System.out.print("Enter your choice: ");
-            choice = scan.nextLine();
+            choice = scan.nextLine().trim();
         }
         
         System.out.println();
         String numOfDef = "";
         while(!numOfDef.matches("[0-9]{1,}")){
             System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
-            numOfDef = scan.nextLine();
+            numOfDef = scan.nextLine().trim();
         }
         int c = Integer.parseInt(numOfDef);
 
         for (int i = 1; i <= c; ++i){
             System.out.print("Enter definition " + i + ": ");
-            definition.add(scan.nextLine());
+            definition.add(scan.nextLine().trim());
         }
 
         if (choice.equals("0") || choice.equals("1"))
@@ -181,19 +181,19 @@ public class Slang_Dictionary{
         System.out.println("1. Add more definition for slang word");
         System.out.println("2. Create new definition for slang word");
         System.out.print("Enter your choice: ");
-        choice = scan.nextLine();
+        choice = scan.nextLine().trim();
 
         System.out.println();
         String numOfDef = "";
         while(!numOfDef.matches("[0-9]{1,}")){
             System.out.print("Enter the number of definition of slang word you want to add (it must be an integer): ");
-            numOfDef = scan.nextLine();
+            numOfDef = scan.nextLine().trim();
         }
         int c = Integer.parseInt(numOfDef);
 
         for (int i = 1; i <= c; ++i){
             System.out.print("Enter definition " + i + ": ");
-            definition.add(scan.nextLine());
+            definition.add(scan.nextLine().trim());
         }
         
         if (choice.equals("1"))
@@ -217,7 +217,7 @@ public class Slang_Dictionary{
         System.out.println("2. No");
         System.out.print("Are you sure to delete word?: ");
 
-        String choice = scan.nextLine();
+        String choice = scan.nextLine().trim();
         if (choice.equals("1")){
             if (data.remove(word) == null)
                 System.out.println("Word does not exist");
@@ -281,7 +281,7 @@ public class Slang_Dictionary{
         String str = "";
         while (!str.matches("[ABCD]{1}")) {
             System.out.print("Choose correct answer (A, B, C or D): ");
-            str = scan.nextLine();
+            str = scan.nextLine().trim();
         }
         int choice = (int)str.toCharArray()[0] - 65;
 
