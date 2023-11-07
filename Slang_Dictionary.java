@@ -48,7 +48,7 @@ public class Slang_Dictionary extends JPanel{
 
     public static void searchSlang(){
         System.out.println();
-        System.out.print("Enter word you want to search: ");
+        System.out.print("Enter slang word that you want to search: ");
         String line = scan.nextLine().trim().toUpperCase();
         //addHistory(word);
 
@@ -131,7 +131,30 @@ public class Slang_Dictionary extends JPanel{
 
     
     public static void main(String [] args) throws IOException{
-        inputFile("slang.txt");
-        createAndShowGUI();
+        inputFile("MyDictionary.txt");
+        
+        String choice;
+
+        while(true){
+			System.out.println();
+			System.out.println("1. Search by slang word");
+			System.out.println("2. Search slang word follow definition");
+			System.out.println("3. Show Search History");
+			System.out.println("4. Add new slang word");
+			System.out.println("5. Edit slang word");
+			System.out.println("6. Delete slang word");
+			System.out.println("7. Reset slang word Dictionary");
+            System.out.println("8. On this day slang word");
+            System.out.println("9. Slang word quiz");
+            System.out.println("10. Slang word quiz follow definition");
+			System.out.println("Choose difference key to exit");
+			System.out.print("Choose your action: ");
+			choice = scan.nextLine();
+
+            if (choice.equals("1"))
+                searchSlang();
+            else 
+                break;
+        }
     }
 }
