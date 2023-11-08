@@ -127,7 +127,7 @@ public class Slang_Dictionary{
     }
 
     public static void addSlangWord() throws IOException, InterruptedException{
-        Set<String> definition = new HashSet<String>();
+        HashSet<String> definition = new HashSet<String>();
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to add: ");
         String word = scan.nextLine().trim().toUpperCase();
@@ -167,7 +167,7 @@ public class Slang_Dictionary{
     }
 
     public static void editSlangWord() throws IOException, InterruptedException{
-        Set<String> definition = new HashSet<String>();
+        HashSet<String> definition = new HashSet<String>();
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to edit: ");
         String word = scan.nextLine().trim().toUpperCase();
@@ -244,7 +244,7 @@ public class Slang_Dictionary{
     }
 
     public static String onThisDaySlang(Boolean quiz) throws IOException, InterruptedException{
-        List<String> keysAsArray = new ArrayList<String>(data.keySet());
+        ArrayList<String> keysAsArray = new ArrayList<String>(data.keySet());
         Random random = new Random();
         String word = keysAsArray.get(random.nextInt(keysAsArray.size()));
         process.inheritIO().start().waitFor();
@@ -263,7 +263,7 @@ public class Slang_Dictionary{
         }
         int randomAnswers = new Random().nextInt(4);
 
-        List<String> keysArray = new ArrayList<String>(quiz.keySet());
+        ArrayList<String> keysArray = new ArrayList<String>(quiz.keySet());
         String question = keysArray.get(randomAnswers);
         Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
 
