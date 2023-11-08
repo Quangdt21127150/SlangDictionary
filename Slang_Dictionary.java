@@ -18,8 +18,10 @@ public class Slang_Dictionary{
             String[] str = line.split("`");
             if(str.length == 2){
                 String[] definition = str[1].split("\\|");
+                for(String i : definition)
+                    i.trim();
                 Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
-                data.put(str[0].trim(), def);
+                data.put(str[0], def);
             }
             line = in.readLine();
         }
@@ -44,7 +46,7 @@ public class Slang_Dictionary{
         save.close();
     }
 
-    public static void searchSlang() throws IOException, InterruptedException{
+    public static void searchSlangWord() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to search: ");
         String input = scan.nextLine().trim().toUpperCase();
@@ -60,7 +62,7 @@ public class Slang_Dictionary{
                 }
             }
 
-            System.out.println("The word " + input + " does not exist!");
+            System.out.println("The word '" + input + "' does not exist!");
         }
         else {
             System.out.println("Had found!");
@@ -263,23 +265,18 @@ public class Slang_Dictionary{
 
         List<String> keysArray = new ArrayList<String>(quiz.keySet());
         String question = keysArray.get(randomAnswers);
-
-        System.out.println();
-        System.out.println("Welcome to slang word quiz");
-        System.out.println("Choose definition of this slang word: " + question);
-
-        int i = 0;
         Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
-        for(Map.Entry<String, Set<String>> item: q){
-            if (i % 2 == 0)
-                System.out.print((char)(i + 65) + ". " + item.getValue().iterator().next() + "\t\t\t");
-            else 
-                System.out.println((char)(i + 65) + ". " + item.getValue().iterator().next());
-            ++i;
-        }
 
         String str = "";
         while (!str.matches("[ABCD]{1}")) {
+            process.inheritIO().start().waitFor();
+            System.out.println("Welcome to slang word quiz");
+            System.out.println("Choose definition of this slang word: " + question);
+            int i = 0;
+            for(Map.Entry<String, Set<String>> item: q){
+                System.out.println((char)(i + 65) + ". " + item.getValue().iterator().next());
+                ++i;
+            }
             System.out.print("Choose correct answer (A, B, C or D): ");
             str = scan.nextLine().trim();
         }
@@ -304,25 +301,18 @@ public class Slang_Dictionary{
 
         List<String> keysArray = new ArrayList<String>(quiz.keySet());
         String question = keysArray.get(randomAnswers);
-
-        System.out.println();
-        System.out.println("Welcome to slang word quiz follow definition");
-        System.out.println("Choose slang word has this definition: " + quiz.get(question).iterator().next());
-
-        int i = 0;
         Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
-        for(Map.Entry<String,Set<String>> item: q){
-            if (i % 2 == 0){
-                System.out.print((char)(i + 65) + ". " + item.getKey() + "\t\t");
-            }
-            else {
-                System.out.println((char)(i + 65) + ". " + item.getKey());
-            }
-            ++i;
-        }
 
         String str = "";
         while (!str.matches("[ABCD]{1}")) {
+            process.inheritIO().start().waitFor();
+            System.out.println("Welcome to slang word quiz follow definition");
+            System.out.println("Choose slang word has this definition: " + quiz.get(question).iterator().next());
+            int i = 0;
+            for(Map.Entry<String,Set<String>> item: q){
+                System.out.println((char)(i + 65) + ". " + item.getKey());
+                ++i;
+            }
             System.out.print("Choose correct answer (A, B, C or D): ");
             str = scan.nextLine().trim();
         }
@@ -360,7 +350,7 @@ public class Slang_Dictionary{
 			choice = scan.nextLine();
 
             if (choice.equals("1")){
-                searchSlang();
+                searchSlangWord();
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
