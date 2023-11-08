@@ -345,7 +345,7 @@ public class Slang_Dictionary{
             System.out.println("8. Random a slang word (On this day slang word)");
             System.out.println("9. Slang word quiz");
             System.out.println("10. Slang word quiz follow definition");
-			System.out.println("Choose difference key to exit");
+			System.out.println("11. Exit");
 			System.out.print("Choose your action: ");
 			choice = scan.nextLine();
 
@@ -399,7 +399,7 @@ public class Slang_Dictionary{
                 System.out.print("Choose any key to back to menu: ");
                 choice = scan.nextLine();
             }
-            else 
+            else if (choice.equals("11"))
                 break;
         }
     }
