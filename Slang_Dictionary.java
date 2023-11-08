@@ -53,12 +53,18 @@ public class Slang_Dictionary{
         addHistory(input);
 
         Set<String> def = data.get(input);
+        Boolean first = true;
         if (def == null){
             Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
             for(Map.Entry<String,Set<String>> word: dictionary){
                 String w = word.getKey();
                 if (w.contains(input)){
-                    System.out.print(w + " ");
+                    if(first){
+                        System.out.print(w);
+                        first = false;
+                        continue;
+                    }
+                    System.out.print(", " + w);
                 }
             }
 
@@ -83,7 +89,12 @@ public class Slang_Dictionary{
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
                     flag = true;
-                    System.out.print(word.getKey() + " ");
+                    if(count == 0){
+                        System.out.print(word.getKey());
+                        ++count;
+                        break;
+                    }
+                    System.out.print(", " + word.getKey());
                     ++count;
                     break;
                 }
