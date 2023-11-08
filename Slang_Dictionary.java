@@ -66,7 +66,7 @@ public class Slang_Dictionary{
         }
         else {
             System.out.println("Had found!");
-            System.out.println("\t" + "+ " + input + " is " + def);
+            System.out.println(" + " + input + " is " + def);
         }
     }
 
