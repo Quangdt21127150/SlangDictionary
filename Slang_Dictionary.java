@@ -29,7 +29,7 @@ public class Slang_Dictionary{
     }
 
     public static void saveDictionary() throws IOException{
-        FileWriter save = new FileWriter(new File("MyDictionary.txt"));
+        FileWriter save = new FileWriter(new File("MyDictionary.data"));
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
         for(Map.Entry<String, Set<String>> word : dictionary){
             save.write(word.getKey() + "`");
@@ -96,7 +96,7 @@ public class Slang_Dictionary{
     private static void inputHistory() throws IOException{
         history = new Vector<String>();
 
-        BufferedReader line = new BufferedReader(new FileReader(new File("History.txt")));
+        BufferedReader line = new BufferedReader(new FileReader(new File("History.data")));
         String word;
         while((word = line.readLine()) != null){
             history.add(word);
@@ -105,7 +105,7 @@ public class Slang_Dictionary{
     }
 
     private static void saveHistory() throws IOException{
-        FileWriter save = new FileWriter(new File("History.txt"));
+        FileWriter save = new FileWriter(new File("History.data"));
         for (String word : history){
             save.write(word + "\n");
         }
@@ -237,7 +237,7 @@ public class Slang_Dictionary{
 
     public static void resetDictionary() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
-        inputFile("slang.txt");
+        inputFile("slang.data");
         saveDictionary();
         System.out.println();
         System.out.println("Reset The Dictionary Success!");
@@ -328,7 +328,7 @@ public class Slang_Dictionary{
     }
 
     public static void main(String [] args) throws IOException, InterruptedException{
-        inputFile("MyDictionary.txt");
+        inputFile("MyDictionary.data");
         inputHistory();
         String choice;
 
