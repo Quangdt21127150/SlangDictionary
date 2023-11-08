@@ -299,7 +299,7 @@ public class Slang_Dictionary{
         }
         int randomAnswers = new Random().nextInt(4);
 
-        List<String> keysArray = new ArrayList<String>(quiz.keySet());
+        ArrayList<String> keysArray = new ArrayList<String>(quiz.keySet());
         String question = keysArray.get(randomAnswers);
         Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
 
