@@ -58,39 +58,42 @@ public class Slang_Dictionary{
             for(Map.Entry<String,Set<String>> word: dictionary){
                 String w = word.getKey();
                 if (w.contains(input)){
-                    System.out.println(" + " + w);
+                    System.out.print(w + " ");
                 }
             }
 
-            System.out.println("The word '" + input + "' does not exist!");
+            System.out.println("\nThe word '" + input + "' does not exist!");
         }
         else {
             System.out.println("Had found!");
-            System.out.println(" + " + input + " is " + def);
+            System.out.println(" " + input + " is " + def);
         }
     }
 
     public static void searchDefinition() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
-        System.out.print("Enter a definition that you want to search: ");
+        System.out.print("Enter a keyword of a definition that you want to search: ");
         String def = scan.nextLine().trim();
 
         Boolean flag = false;
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+        int count = 0;
         for(Map.Entry<String,Set<String>> word: dictionary){
             Set<String> defList = word.getValue();
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
                     flag = true;
-                    System.out.println(" + " + word.getKey());
+                    System.out.print(word.getKey() + " ");
+                    ++count;
                     break;
                 }
             }
         }
 
-        if(!flag){
-            System.out.println("Can not find slang word has this definition!");
-        }
+        if(!flag)
+            System.out.println("Can not find slang word has the definition matching this keyword!");
+        else
+            System.out.println("\nThere are " + count + " slang word having the definition matching this keyword!");
     }
 
     private static void inputHistory() throws IOException{
@@ -123,7 +126,7 @@ public class Slang_Dictionary{
             System.out.println("History is empty");
         else 
             for(String word : history)
-                System.out.println("\t" + "+ " + word);
+                System.out.println(word + " ");
     }
 
     public static void addSlangWord() throws IOException, InterruptedException{
