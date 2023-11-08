@@ -21,7 +21,7 @@ public class Slang_Dictionary{
                 for(String i : definition)
                     i.trim();
                 Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
-                data.put(str[0], def);
+                data.put(str[0].trim(), def);
             }
             line = in.readLine();
         }
@@ -49,7 +49,7 @@ public class Slang_Dictionary{
     public static void searchSlangWord() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to search: ");
-        String input = scan.nextLine().trim().toUpperCase();
+        String input = scan.nextLine().trim();
         addHistory(input);
 
         Set<String> def = data.get(input);
@@ -57,8 +57,8 @@ public class Slang_Dictionary{
             Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
             for(Map.Entry<String,Set<String>> word: dictionary){
                 String w = word.getKey();
-                if (w.contains(input.toUpperCase())){
-                    System.out.println("\t" + "+ " + w);
+                if (w.contains(input)){
+                    System.out.println(" + " + w);
                 }
             }
 
@@ -82,7 +82,7 @@ public class Slang_Dictionary{
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
                     flag = true;
-                    System.out.println("\t" + "+ " + word.getKey());
+                    System.out.println(" + " + word.getKey());
                     break;
                 }
             }
@@ -130,7 +130,7 @@ public class Slang_Dictionary{
         HashSet<String> definition = new HashSet<String>();
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to add: ");
-        String word = scan.nextLine().trim().toUpperCase();
+        String word = scan.nextLine().trim();
 
         String choice = "0";
         if (data.containsKey(word)){
@@ -170,7 +170,7 @@ public class Slang_Dictionary{
         HashSet<String> definition = new HashSet<String>();
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to edit: ");
-        String word = scan.nextLine().trim().toUpperCase();
+        String word = scan.nextLine().trim();
 
         if (!data.containsKey(word)){
             System.out.println("Word does not exist!");
@@ -213,7 +213,7 @@ public class Slang_Dictionary{
     public static void deleteSlangWord() throws IOException, InterruptedException{
         process.inheritIO().start().waitFor();
         System.out.print("Enter a slang word that you want to delete: ");
-        String word = scan.nextLine().trim().toUpperCase();
+        String word = scan.nextLine().trim();
 
         System.out.println("1. Yes");
         System.out.println("2. No");
