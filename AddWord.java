@@ -131,4 +131,3 @@ public class AddWord extends JFrame implements ActionListener {
 	}
 
 }
-

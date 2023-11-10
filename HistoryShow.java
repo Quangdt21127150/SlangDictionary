@@ -56,7 +56,7 @@ public class HistoryShow extends JFrame implements ActionListener {
 		con.add(Box.createRigidArea(new Dimension(0, 50)));
 		con.add(bottomPanel);
 
-		// Setting JFrame
+		// Setting J
 		this.setTitle("History Window");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);

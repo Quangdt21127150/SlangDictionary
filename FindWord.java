@@ -5,7 +5,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-public class FindSW extends JFrame implements ActionListener, TableModelListener {
+public class FindWord extends JFrame implements ActionListener, TableModelListener {
 	JButton btnBack, btnFind;
 	JTextField textField;
 	JTable jt;
@@ -18,7 +18,7 @@ public class FindSW extends JFrame implements ActionListener, TableModelListener
 			JOptionPane.YES_NO_OPTION);
 	String[][] data = { { "", "", "" } };
 
-	FindSW() throws Exception {
+	FindWord() throws Exception {
 		Container con = this.getContentPane();
 		slangword = SlangDictionary.createDictionary();
 		// Title Label
@@ -187,4 +187,3 @@ public class FindSW extends JFrame implements ActionListener, TableModelListener
 		}
 	}
 }
-

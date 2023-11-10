@@ -5,13 +5,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class ListSW extends JFrame implements ActionListener, TableModelListener {
+public class ListWord extends JFrame implements ActionListener, TableModelListener {
 	JButton btnBack;
 	JTable jt;
 	SlangDictionary slangWord;
 	String[][] dataCopy;
 
-	public ListSW() throws Exception {
+	public ListWord() throws Exception {
 		Container con = this.getContentPane();
 		slangWord = SlangDictionary.createDictionary();
 
@@ -21,19 +21,23 @@ public class ListSW extends JFrame implements ActionListener, TableModelListener
 		titleLabel.setForeground(Color.green);
 		titleLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 35));
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
+		// titleLabel.setBackground(Color.black);
+		// titleLabel.setOpaque(true);
 
 		// Label
 		JLabel resultLabel = new JLabel();
 		resultLabel.setForeground(Color.black);
 		resultLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 18));
 		resultLabel.setAlignmentX(CENTER_ALIGNMENT);
+		// resultLabel.setBackground(Color.blue);
+		// resultLabel.setOpaque(true);
 
 		// List Slang Words
 		JPanel panelTable = new JPanel();
 		panelTable.setBackground(Color.black);
-		String[][] data = slangWord.getData();
+		String data[][] = slangWord.getData();
 		dataCopy = slangWord.getData();
-		String[] column = { "Num", "Slag", "Meaning" };
+		String column[] = { "Num", "Slag", "Meaning" };
 		resultLabel.setText("We have " + data.length + " slang words");
 		jt = new JTable(data, column);
 		jt.setRowHeight(30);
@@ -98,4 +102,3 @@ public class ListSW extends JFrame implements ActionListener, TableModelListener
 		}
 	}
 }
-
