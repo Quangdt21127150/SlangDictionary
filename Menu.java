@@ -8,7 +8,7 @@ public class Menu extends JFrame implements ActionListener {
 	SlangDictionary slangWord;
 
 	Menu() {
-		slangWord = SlangDictionary.createDictionary();
+		slangWord = SlangDictionary.getInstance();
 		// A Label
 		JLabel label = new JLabel("Slang Words");
 		label.setForeground(Color.green);

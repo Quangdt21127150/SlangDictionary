@@ -6,7 +6,7 @@ import javax.swing.table.*;
 
 public class HistoryShow extends JFrame implements ActionListener {
 	JButton btnReturn, btnExit;
-	SlangDictionary slangWord = SlangDictionary.createDictionary();
+	SlangDictionary slangWord = SlangDictionary.getInstance();
 
 	HistoryShow() {
 		Container con = this.getContentPane();

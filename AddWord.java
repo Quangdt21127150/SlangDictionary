@@ -10,7 +10,7 @@ public class AddWord extends JFrame implements ActionListener {
 
 	AddWord() {
 		// Get container & slang word
-		slangWord = SlangDictionary.createDictionary();
+		slangWord = SlangDictionary.getInstance();
 		Container con = this.getContentPane();
 		JLabel titleLabel = new JLabel();
 		titleLabel.setText("Add Slang Words");

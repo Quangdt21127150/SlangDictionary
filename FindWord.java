@@ -20,7 +20,7 @@ public class FindWord extends JFrame implements ActionListener, TableModelListen
 
 	FindWord() throws Exception {
 		Container con = this.getContentPane();
-		slangword = SlangDictionary.createDictionary();
+		slangword = SlangDictionary.getInstance();
 		// Title Label
 		JLabel titleLabel = new JLabel();
 		titleLabel.setText("Find Slang Words");

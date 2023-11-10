@@ -14,7 +14,7 @@ public class DeleteWord extends JFrame implements ActionListener, ListSelectionL
 
 	public DeleteWord() throws Exception {
 		Container con = this.getContentPane();
-		slangWord = SlangDictionary.createDictionary();
+		slangWord = SlangDictionary.getInstance();
 
 		// Label
 		JLabel titleLabel = new JLabel();

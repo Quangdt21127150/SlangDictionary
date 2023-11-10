@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class RandomWord extends JFrame implements ActionListener {
 	JButton btnBack, btnReset;
-	SlangDictionary slangWord = SlangDictionary.createDictionary();
+	SlangDictionary slangWord = SlangDictionary.getInstance();
 	JLabel lb2, lb4;
 
 	RandomWord() {

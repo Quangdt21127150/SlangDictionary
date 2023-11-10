@@ -10,7 +10,7 @@ public class SlangDictionary {
 	private String FILE_ORIGINAL_SLANGWORD = "data/slang.data";
 	private String FILE_HISTORY = "data/History.data";
 
-	private SlangDictionary() {
+	SlangDictionary() {
 		try {
 			readFile(FILE_SLANGWORD);
 		} catch (Exception e) {
@@ -18,7 +18,7 @@ public class SlangDictionary {
 		}
 	}
 
-	public static SlangDictionary createDictionary() {
+	public static SlangDictionary getInstance() {
 		if (dict == null) {
 			synchronized (SlangDictionary.class) {
 				if (dict == null) {
@@ -53,7 +53,7 @@ public class SlangDictionary {
         }
 	}
 
-	void readFile(String file) throws Exception {
+	public void readFile(String file) throws Exception {
 		data.clear();
 		BufferedReader br = new BufferedReader(new FileReader(new File(file)));
     

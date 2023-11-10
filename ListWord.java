@@ -13,7 +13,7 @@ public class ListWord extends JFrame implements ActionListener, TableModelListen
 
 	public ListWord() throws Exception {
 		Container con = this.getContentPane();
-		slangWord = SlangDictionary.createDictionary();
+		slangWord = SlangDictionary.getInstance();
 
 		// Label
 		JLabel titleLabel = new JLabel();

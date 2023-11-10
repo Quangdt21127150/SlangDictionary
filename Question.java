@@ -8,7 +8,7 @@ public class Question extends JFrame implements ActionListener {
 	String[] s;
 
 	Question(int type) {
-		s = (SlangDictionary.createDictionary()).quiz(type);
+		s = (SlangDictionary.getInstance()).quiz(type);
 		// A Label
 		JLabel label = new JLabel("Find out the correct answer");
 		label.setForeground(Color.green);
