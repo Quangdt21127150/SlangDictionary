@@ -1,18 +1,17 @@
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
-public class SlangDictionary{
-    public static TreeMap<String, List<String>> data = new TreeMap<>();
-    private static SlangDictionary dict = new SlangDictionary();
-	private static String FILE_SLANGWORD = "file data/MyDictionary.data";
+public class SlangDictionary {
+	private TreeMap<String, List<String>> data = new TreeMap<>();
+	private static SlangDictionary dict = new SlangDictionary();
+	private String FILE_SLANGWORD = "file data/MyDictionary.data";
 	private String FILE_ORIGINAL_SLANGWORD = "file data/slang.data";
 	private String FILE_HISTORY = "file data/History.data";
 
-    private SlangDictionary() {
+	private SlangDictionary() {
 		try {
-			inputFile(FILE_SLANGWORD);
+			readFile(FILE_SLANGWORD);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,55 +28,68 @@ public class SlangDictionary{
 		return dict;
 	}
 
-    public void inputFile(String file) throws IOException{
-        data.clear();
-        File f = new File(file);
-        if(!f.exists())
-            return;
-        BufferedReader in = new BufferedReader(new FileReader(file));
-        String line = in.readLine();
-        while(line != null){
-            String[] str = line.split("`");
-            if(str.length == 2){
-                String[] definition = str[1].split("\\|");
-                for(String i : definition)
-                    i.trim();
-                List<String> def = new ArrayList<>(Arrays.stream(definition).collect(Collectors.toSet()));
-                data.put(str[0].trim(), def);
-            }
-            line = in.readLine();
-        }
-        in.close();
-		System.out.println(1);
-    }
+	void saveFile(String file) {
+		try {
+			PrintWriter printWriter = new PrintWriter(new File(file));
+			StringBuilder stringBuilder = new StringBuilder();
 
-    public static void saveDictionary(){
-        try {
-            FileWriter save = new FileWriter(new File(FILE_SLANGWORD));
-            Set<Map.Entry<String, List<String>>> dictionary = data.entrySet();
-            for(Map.Entry<String, List<String>> word : dictionary){
-                save.write(word.getKey() + "`");
-                List<String> definition = word.getValue();
-                String lastDef = definition.stream().reduce((a, b) -> b).get();
-                for (String def : definition){
-                    if (def.equals(lastDef))
-                        save.write(def + "\n");
-                    else 
-                        save.write(def + "| ");
-                }
-            };
+			String[][] s = new String[data.size()][3];
+			Set<String> keySet = data.keySet();
+			Object[] keyArray = keySet.toArray();
+			for (int i = 0; i < data.size(); ++i) {
+				Integer in = i;
+				s[i][0] = in.toString();
+				s[i][1] = (String) keyArray[i];
+				List<String> meaning = data.get(keyArray[i]);
+				stringBuilder.append(s[i][1] + "`" + meaning.get(0));
+				for (int j = 1; j < meaning.size(); j++) {
+					stringBuilder.append("|" + meaning.get(j));
+				}
+				stringBuilder.append("\n");
+			}
+			
+			printWriter.write(stringBuilder.toString());
+			printWriter.close();
 
-            save.close();
-        } catch (Exception e) {}
-    }
+		} catch (Exception e) {
+		}
+	}
 
-    public String[][] getData() {
+	void readFile(String file) throws Exception {
+		data.clear();
+		String slag = null;
+		Scanner scanner = new Scanner(new File(file));
+		scanner.useDelimiter("`");
+		scanner.next();
+		String temp = scanner.next();
+		String[] part = temp.split("\n");
+		while (scanner.hasNext()) {
+			List<String> meaning = new ArrayList<String>();
+			slag = part[1].trim();
+			temp = scanner.next();
+			part = temp.split("\n");
+			if (data.containsKey(slag)) {
+				meaning = data.get(slag);
+			}
+			if (part[0].contains("|")) {
+				String[] d = (part[0]).split("\\|");
+				Collections.addAll(meaning, d);
+			} else {
+				meaning.add(part[0]);
+			}
+			// data.put(slag.trim(), meaning);
+			data.put(slag, meaning);
+		}
+		scanner.close();
+	}
+
+	public String[][] getData() {
 		String[][] s = new String[data.size()][3];
 		Set<String> slagListSet = data.keySet();
 		Object[] slagList = slagListSet.toArray();
 		int index = 0;
 		for (int i = 0; i < data.size(); ++i) {
-			s[i][0] = String.valueOf(i + 1);
+			s[i][0] = String.valueOf(i);
 			s[i][1] = (String) slagList[index];
 			List<String> meaning = data.get(slagList[index]);
 			s[i][2] = meaning.get(0);
@@ -100,7 +112,7 @@ public class SlangDictionary{
 		int size = listMeaning.size();
 		String s[][] = new String[size][3];
 		for (int i = 0; i < size; ++i) {
-			s[i][0] = String.valueOf(i + 1);
+			s[i][0] = String.valueOf(i);
 			s[i][1] = key;
 			s[i][2] = listMeaning.get(i);
 		}
@@ -111,7 +123,7 @@ public class SlangDictionary{
 		List<String> meaning = data.get(slag);
 		int index = meaning.indexOf(oldValue);
 		meaning.set(index, newValue);
-		saveDictionary();
+		this.saveFile(FILE_SLANGWORD);
 	}
 
 	public void saveHistory(String slag, String meaning) throws Exception {
@@ -178,8 +190,8 @@ public class SlangDictionary{
 
 	public void reset() {
 		try {
-			inputFile(FILE_ORIGINAL_SLANGWORD);
-			inputFile(FILE_HISTORY);
+			readFile(FILE_ORIGINAL_SLANGWORD);
+			this.saveFile(FILE_SLANGWORD);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -194,28 +206,28 @@ public class SlangDictionary{
 			meaningList.remove(index);
 			data.put(slag, meaningList);
 		}
-	    saveDictionary();
+		this.saveFile(FILE_SLANGWORD);
 	}
 
 	public void addNew(String slag, String meaning) {
 		List<String> meaningList = new ArrayList<>();
 		meaningList.add(meaning);
 		data.put(slag, meaningList);
-		saveDictionary();
+		this.saveFile(FILE_SLANGWORD);
 	}
 
 	public void addDuplicate(String slag, String meaning) {
 		List<String> meaningList = data.get(slag);
 		meaningList.add(meaning);
 		data.put(slag, meaningList);
-		saveDictionary();
+		this.saveFile(FILE_SLANGWORD);
 	}
 
 	public void addOverwrite(String slag, String meaning) {
 		List<String> meaningList = data.get(slag);
 		meaningList.set(0, meaning);
 		data.put(slag, meaningList);
-		saveDictionary();
+		this.saveFile(FILE_SLANGWORD);
 	}
 
 	public boolean checkSlang(String slag) {
