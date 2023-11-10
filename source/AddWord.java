@@ -16,7 +16,11 @@ public class AddWord extends JFrame implements ActionListener {
 		Container con = this.getContentPane();
 		JLabel titleLabel = new JLabel();
 		titleLabel.setText("Add Slang Words");
+
+		//Reference about setForeground: https://stackoverflow.com/questions/34262447/java-applet-setforeground-what-exactly-it-does-and-how-to-see-its-effect
 		titleLabel.setForeground(Color.green);
+
+		//Reference about setFont: https://stackoverflow.com/questions/16761630/font-createfont-set-color-and-size-java-awt-font
 		titleLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 35));
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 		titleLabel.setPreferredSize(new Dimension(300, 100));
@@ -60,6 +64,7 @@ public class AddWord extends JFrame implements ActionListener {
 		form.add(slagPanel);
 		con.add(Box.createRigidArea(new Dimension(0, 10)));
 		form.add(meaningPanel);
+		
 		// Button Back and button Add
 		JPanel bottomPanel = new JPanel();
 		btnBack = new JButton("Back ");

@@ -6,7 +6,8 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class SlangDictionary {
-	private TreeMap<String, List<String>> data = new TreeMap<>();
+	//Reference about TreeMap: https://viettuts.vn/java-collection/treemap-trong-java
+	private TreeMap<String, List<String>> data = new TreeMap<>(); 
 	private static SlangDictionary dict = new SlangDictionary();
 	private String FILE_SLANGWORD = "MyDictionary.data";
 	private String FILE_ORIGINAL_SLANGWORD = "slang.data";
@@ -20,6 +21,7 @@ public class SlangDictionary {
 		}
 	}
 
+	//Reference about synchronized in Java: https://viblo.asia/p/java-synchronized-blocks-jlA7GK04vKZQ
 	public static SlangDictionary getInstance() {
 		if (dict == null) {
 			synchronized (SlangDictionary.class) {
