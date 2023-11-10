@@ -61,12 +61,10 @@ public class AddWord extends JFrame implements ActionListener {
 		// Button Back and button Add
 		JPanel bottomPanel = new JPanel();
 		btnBack = new JButton("Back ");
-		// btnBack.addActionListener(this);
 		btnBack.setFocusable(false);
 		btnBack.addActionListener(this);
 		btnBack.setAlignmentX(CENTER_ALIGNMENT);
 		btnAdd = new JButton("Add");
-		// btnBack.addActionListener(this);
 		btnAdd.setFocusable(false);
 		btnAdd.addActionListener(this);
 		btnAdd.setAlignmentX(CENTER_ALIGNMENT);

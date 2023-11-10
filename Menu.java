@@ -14,7 +14,7 @@ public class Menu extends JFrame implements ActionListener {
 		label.setForeground(Color.green);
 		label.setFont(new Font("Gill Sans MT", Font.PLAIN, 35));
 		label.setAlignmentX(CENTER_ALIGNMENT);
-		// label.addMouseListener(this);
+
 		// A Grid
 		b1 = new JButton("1. List Slang Words");
 		b1.addActionListener(this);
@@ -57,7 +57,6 @@ public class Menu extends JFrame implements ActionListener {
 		b8.setFocusable(false);
 
 		JPanel panelCenter = new JPanel();
-		// panelCenter.setBackground(Color.gray);
 		panelCenter.setLayout(new GridLayout(3, 3, 10, 10));
 		panelCenter.add(b1);
 		panelCenter.add(b2);

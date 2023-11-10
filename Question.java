@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class Question extends JFrame implements ActionListener {
 	JButton b1, b2, b3, b4, btnBack;
-	// final int type;
 	String[] s;
 
 	Question(int type) {

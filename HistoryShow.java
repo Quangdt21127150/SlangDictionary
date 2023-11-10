@@ -22,7 +22,7 @@ public class HistoryShow extends JFrame implements ActionListener {
 		panelTable.setBackground(Color.black);
 
 		String[][] data = slangWord.readHistory();
-		String[] column = { "Num", "Slang Word", "Definition" };
+		String[] column = { "No.", "Slang Word", "Definition" };
 		JTable jt = new JTable(data, column);
 		jt.setRowHeight(30);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -56,7 +56,7 @@ public class HistoryShow extends JFrame implements ActionListener {
 		con.add(Box.createRigidArea(new Dimension(0, 50)));
 		con.add(bottomPanel);
 
-		// Setting J
+		// Setting JFrame
 		this.setTitle("History Window");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);

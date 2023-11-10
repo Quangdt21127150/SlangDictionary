@@ -21,23 +21,19 @@ public class ListWord extends JFrame implements ActionListener, TableModelListen
 		titleLabel.setForeground(Color.green);
 		titleLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 35));
 		titleLabel.setAlignmentX(CENTER_ALIGNMENT);
-		// titleLabel.setBackground(Color.black);
-		// titleLabel.setOpaque(true);
 
 		// Label
 		JLabel resultLabel = new JLabel();
 		resultLabel.setForeground(Color.black);
 		resultLabel.setFont(new Font("Gill Sans MT", Font.PLAIN, 18));
 		resultLabel.setAlignmentX(CENTER_ALIGNMENT);
-		// resultLabel.setBackground(Color.blue);
-		// resultLabel.setOpaque(true);
 
 		// List Slang Words
 		JPanel panelTable = new JPanel();
 		panelTable.setBackground(Color.black);
-		String data[][] = slangWord.getData();
+		String[][] data = slangWord.getData();
 		dataCopy = slangWord.getData();
-		String column[] = { "Num", "Slag", "Meaning" };
+		String[] column = { "No.", "Slag", "Meaning" };
 		resultLabel.setText("We have " + data.length + " slang words");
 		jt = new JTable(data, column);
 		jt.setRowHeight(30);
@@ -46,7 +42,6 @@ public class ListWord extends JFrame implements ActionListener, TableModelListen
 		jt.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 		jt.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
 		jt.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-		// jt.putClientProperty("terminateEditOnFocusLost", true);
 		jt.getModel().addTableModelListener(this);
 
 		JScrollPane sp = new JScrollPane(jt);

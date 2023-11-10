@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class SlangDictionary {
 	private TreeMap<String, List<String>> data = new TreeMap<>();
 	private static SlangDictionary dict = new SlangDictionary();
-	private String FILE_SLANGWORD = "../Data Files/MyDictionary.data";
-	private String FILE_ORIGINAL_SLANGWORD = "../Data Files/slang.data";
-	private String FILE_HISTORY = "../Data Files/History.data";
+	private String FILE_SLANGWORD = "Data Files/MyDictionary.data";
+	private String FILE_ORIGINAL_SLANGWORD = "Data Files/slang.data";
+	private String FILE_HISTORY = "Data Files/History.data";
 
 	private SlangDictionary() {
 		try {
@@ -114,7 +114,6 @@ public class SlangDictionary {
 	}
 
 	public void saveHistory(String slag, String meaning) throws Exception {
-		// String file = "history.txt";
 		File file1 = new File(FILE_HISTORY);
 		FileWriter fr = new FileWriter(file1, true);
 		fr.write(slag + "`" + meaning + "\n");
