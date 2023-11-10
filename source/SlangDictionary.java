@@ -1,3 +1,5 @@
+package source;
+
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
@@ -6,9 +8,9 @@ import java.util.stream.Collectors;
 public class SlangDictionary {
 	private TreeMap<String, List<String>> data = new TreeMap<>();
 	private static SlangDictionary dict = new SlangDictionary();
-	private String FILE_SLANGWORD = "data/MyDictionary.data";
-	private String FILE_ORIGINAL_SLANGWORD = "data/slang.data";
-	private String FILE_HISTORY = "data/History.data";
+	private String FILE_SLANGWORD = "MyDictionary.data";
+	private String FILE_ORIGINAL_SLANGWORD = "slang.data";
+	private String FILE_HISTORY = "History.data";
 
 	SlangDictionary() {
 		try {
@@ -48,7 +50,7 @@ public class SlangDictionary {
 
             fw.close();
         }
-        catch (IOException e){
+        catch (Exception e){
             System.out.println("Error message: " + e);
         }
 	}
