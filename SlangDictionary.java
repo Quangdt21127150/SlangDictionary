@@ -18,7 +18,7 @@ public class SlangDictionary{
 		}
 	}
 
-	public static SlangDictionary crateDictionary() {
+	public static SlangDictionary createDictionary() {
 		if (dict == null) {
 			synchronized (SlangDictionary.class) {
 				if (dict == null) {
@@ -29,7 +29,7 @@ public class SlangDictionary{
 		return dict;
 	}
 
-    public static void inputFile(String file) throws IOException{
+    public void inputFile(String file) throws IOException{
         data.clear();
         File f = new File(file);
         if(!f.exists())
@@ -48,6 +48,7 @@ public class SlangDictionary{
             line = in.readLine();
         }
         in.close();
+		System.out.println(1);
     }
 
     public static void saveDictionary(){

@@ -8,7 +8,7 @@ public class Menu extends JFrame implements ActionListener {
     SlangDictionary slangWord;
 
     Menu() {
-        slangWord = SlangDictionary.crateDictionary();
+        slangWord = SlangDictionary.createDictionary();
         // A Label
         JLabel label = new JLabel("Slang Words");
         label.setForeground(Color.green);
@@ -139,5 +139,4 @@ public class Menu extends JFrame implements ActionListener {
             new Quiz();
         }
     }
-
 }
