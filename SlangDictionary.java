@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class SlangDictionary {
 	private TreeMap<String, List<String>> data = new TreeMap<>();
 	private static SlangDictionary dict = new SlangDictionary();
-	private String FILE_SLANGWORD = "Data Files/MyDictionary.data";
-	private String FILE_ORIGINAL_SLANGWORD = "Data Files/slang.data";
-	private String FILE_HISTORY = "Data Files/History.data";
+	private String FILE_SLANGWORD = "data/MyDictionary.data";
+	private String FILE_ORIGINAL_SLANGWORD = "data/slang.data";
+	private String FILE_HISTORY = "data/History.data";
 
 	private SlangDictionary() {
 		try {
