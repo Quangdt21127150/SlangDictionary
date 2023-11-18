@@ -8,5 +8,3 @@
 8.	Chức năng random 1 slang word (On this day slang word).(10)
 9.	Chức năng đố vui, chương trình hiển thị 1 random slang word, với 4 đáp án cho người dùng chọn.(10)
 10.	Chức năng đố vui, chương trình hiển thị 1 definition, với 4 slang words đáp án cho người dùng chọn.(10)
-
-Link video youtube: https://youtu.be/8e4fjmmPhDs

@@ -37,6 +37,7 @@ public class AddWord extends JFrame implements ActionListener {
 		labelForSlang.setPreferredSize(new Dimension(100, 20));
 		slagPanel.add(labelForSlang);
 		slagPanel.add(textFieldSlang);
+		//Reference about SpringLayout: https://viettuts.vn/java-swing/springlayout-trong-java-swing
 		layout.putConstraint(SpringLayout.WEST, labelForSlang, 6, SpringLayout.WEST, slagPanel);
 		layout.putConstraint(SpringLayout.NORTH, labelForSlang, 6, SpringLayout.NORTH, slagPanel);
 		layout.putConstraint(SpringLayout.WEST, textFieldSlang, 6, SpringLayout.EAST, labelForSlang);
