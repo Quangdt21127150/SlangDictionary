@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Question extends JFrame implements ActionListener {
-	JButton b1, b2, b3, b4, btnBack;
+	JButton btnA, btnB, btnC, btnD, btnBack;
 	String[] s;
 
 	Question(int type) {
@@ -29,29 +29,29 @@ public class Question extends JFrame implements ActionListener {
 
 		// Add space
 		// A Grid Answers
-		b1 = new JButton("A." + s[1]);
-		b1.addActionListener(this);
-		b1.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		b2 = new JButton("B." + s[2]);
-		b2.addActionListener(this);
-		b2.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		b3 = new JButton("C." + s[3]);
-		b3.addActionListener(this);
-		b3.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
-		b4 = new JButton("D. " + s[4]);
-		b4.addActionListener(this);
-		b4.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		btnA = new JButton("A." + s[1]);
+		btnA.addActionListener(this);
+		btnA.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		btnB = new JButton("B." + s[2]);
+		btnB.addActionListener(this);
+		btnB.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		btnC = new JButton("C." + s[3]);
+		btnC.addActionListener(this);
+		btnC.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
+		btnD = new JButton("D. " + s[4]);
+		btnD.addActionListener(this);
+		btnD.setFont(new Font("Lucida Handwriting", Font.PLAIN, 14));
 
-		JPanel panelCenter = new JPanel();
-		panelCenter.setLayout(new GridLayout(2, 2, 10, 10));
-		panelCenter.add(b1);
-		panelCenter.add(b2);
-		panelCenter.add(b3);
-		panelCenter.add(b4);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayout(2, 2, 10, 10));
+		mainPanel.add(btnA);
+		mainPanel.add(btnB);
+		mainPanel.add(btnC);
+		mainPanel.add(btnD);
 		Dimension size2 = new Dimension(600, 200);
-		panelCenter.setMaximumSize(size2);
-		panelCenter.setPreferredSize(size2);
-		panelCenter.setMinimumSize(size2);
+		mainPanel.setMaximumSize(size2);
+		mainPanel.setPreferredSize(size2);
+		mainPanel.setMinimumSize(size2);
 		// Button back
 
 		btnBack = new JButton("Back");
@@ -67,7 +67,7 @@ public class Question extends JFrame implements ActionListener {
 		con.add(Box.createRigidArea(new Dimension(0, 30)));
 		con.add(questionLabel);
 		con.add(Box.createRigidArea(new Dimension(0, 50)));
-		con.add(panelCenter);
+		con.add(mainPanel);
 		con.add(Box.createRigidArea(new Dimension(0, 50)));
 		con.add(buttonPane);
 		this.setTitle("Question Quiz");
@@ -79,13 +79,13 @@ public class Question extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == b1) {
+		if (e.getSource() == btnA) {
 			this.answer(1);
-		} else if (e.getSource() == b2) {
+		} else if (e.getSource() == btnB) {
 			this.answer(2);
-		} else if (e.getSource() == b3) {
+		} else if (e.getSource() == btnC) {
 			this.answer(3);
-		} else if (e.getSource() == b4) {
+		} else if (e.getSource() == btnD) {
 			this.answer(4);
 		} else if (e.getSource() == btnBack) {
 			this.dispose();
@@ -101,37 +101,37 @@ public class Question extends JFrame implements ActionListener {
 		} else {
 			JOptionPane.showMessageDialog(this, "Wrong Answer", "Inane error", JOptionPane.ERROR_MESSAGE);
 			if (ans == 1)
-				b1.setBackground(Color.red);
+				btnA.setBackground(Color.red);
 			else if (ans == 2)
-				b2.setBackground(Color.red);
+				btnB.setBackground(Color.red);
 			else if (ans == 3)
-				b3.setBackground(Color.red);
+				btnC.setBackground(Color.red);
 			else if (ans == 4)
-				b4.setBackground(Color.red);
+				btnD.setBackground(Color.red);
 		}
 		if (s[1].equals(s[5])) {
-			b1.setEnabled(false);
-			b1.setBackground(Color.green);
+			btnA.setEnabled(false);
+			btnA.setBackground(Color.green);
 		} else {
-			b1.setEnabled(false);
+			btnA.setEnabled(false);
 		}
 		if (s[2].equals(s[5])) {
-			b2.setEnabled(false);
-			b2.setBackground(Color.green);
+			btnB.setEnabled(false);
+			btnB.setBackground(Color.green);
 		} else {
-			b2.setEnabled(false);
+			btnB.setEnabled(false);
 		}
 		if (s[3].equals(s[5])) {
-			b3.setEnabled(false);
-			b3.setBackground(Color.green);
+			btnC.setEnabled(false);
+			btnC.setBackground(Color.green);
 		} else {
-			b3.setEnabled(false);
+			btnC.setEnabled(false);
 		}
 		if (s[4].equals(s[5])) {
-			b4.setEnabled(false);
-			b4.setBackground(Color.green);
+			btnD.setEnabled(false);
+			btnD.setBackground(Color.green);
 		} else {
-			b4.setEnabled(false);
+			btnD.setEnabled(false);
 		}
 	}
 }

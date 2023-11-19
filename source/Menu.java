@@ -6,7 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Menu extends JFrame implements ActionListener {
-	JButton b1, b2, b3, b4, b5, b6, b7, b8;
+	JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
 	SlangDictionary slangWord;
 
 	Menu() {
@@ -18,67 +18,67 @@ public class Menu extends JFrame implements ActionListener {
 		label.setAlignmentX(CENTER_ALIGNMENT);
 
 		// A Grid
-		b1 = new JButton("1. List Slang Words");
-		b1.addActionListener(this);
-		b1.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b1.setFocusable(false);
+		btn1 = new JButton("1. List Slang Words");
+		btn1.addActionListener(this);
+		btn1.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn1.setFocusable(false);
 
-		b2 = new JButton("2. Find Slang word");
-		b2.addActionListener(this);
-		b2.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b2.setFocusable(false);
+		btn2 = new JButton("2. Find Slang word");
+		btn2.addActionListener(this);
+		btn2.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn2.setFocusable(false);
 
-		b3 = new JButton("3. Add slang word");
-		b3.addActionListener(this);
-		b3.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b3.setFocusable(false);
+		btn3 = new JButton("3. Add slang word");
+		btn3.addActionListener(this);
+		btn3.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn3.setFocusable(false);
 
-		b4 = new JButton("4. Random Slang Words");
-		b4.addActionListener(this);
-		b4.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b4.setFocusable(false);
+		btn4 = new JButton("4. Random Slang Words");
+		btn4.addActionListener(this);
+		btn4.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn4.setFocusable(false);
 
-		b5 = new JButton("5. History");
-		b5.addActionListener(this);
-		b5.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b5.setFocusable(false);
+		btn5 = new JButton("5. History");
+		btn5.addActionListener(this);
+		btn5.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn5.setFocusable(false);
 
-		b6 = new JButton("6. Delete Slang Word");
-		b6.addActionListener(this);
-		b6.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b6.setFocusable(false);
+		btn6 = new JButton("6. Delete Slang Word");
+		btn6.addActionListener(this);
+		btn6.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn6.setFocusable(false);
 
-		b7 = new JButton("7. Reset Slang Word");
-		b7.addActionListener(this);
-		b7.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b7.setFocusable(false);
+		btn7 = new JButton("7. Reset Slang Word");
+		btn7.addActionListener(this);
+		btn7.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn7.setFocusable(false);
 
-		b8 = new JButton("8. Quiz");
-		b8.addActionListener(this);
-		b8.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
-		b8.setFocusable(false);
+		btn8 = new JButton("8. Quiz");
+		btn8.addActionListener(this);
+		btn8.setFont(new Font("Gill Sans MT", Font.PLAIN, 14));
+		btn8.setFocusable(false);
 
-		JPanel panelCenter = new JPanel();
-		panelCenter.setLayout(new GridLayout(3, 3, 10, 10));
-		panelCenter.add(b1);
-		panelCenter.add(b2);
-		panelCenter.add(b3);
-		panelCenter.add(b4);
-		panelCenter.add(b5);
-		panelCenter.add(b6);
-		panelCenter.add(b7);
-		panelCenter.add(b8);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayout(3, 3, 10, 10));
+		mainPanel.add(btn1);
+		mainPanel.add(btn2);
+		mainPanel.add(btn3);
+		mainPanel.add(btn4);
+		mainPanel.add(btn5);
+		mainPanel.add(btn6);
+		mainPanel.add(btn7);
+		mainPanel.add(btn8);
 
 		Dimension size2 = new Dimension(600, 500);
-		panelCenter.setMaximumSize(size2);
-		panelCenter.setPreferredSize(size2);
-		panelCenter.setMinimumSize(size2);
+		mainPanel.setMaximumSize(size2);
+		mainPanel.setPreferredSize(size2);
+		mainPanel.setMinimumSize(size2);
 		Container con = this.getContentPane();
 		con.setLayout(new BoxLayout(con, BoxLayout.Y_AXIS));
 		con.add(Box.createRigidArea(new Dimension(0, 10)));
 		con.add(label);
 		con.add(Box.createRigidArea(new Dimension(0, 30)));
-		con.add(panelCenter);
+		con.add(mainPanel);
 
 		// Setting Frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,14 +92,14 @@ public class Menu extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == b1) {
+		if (e.getSource() == btn1) {
 			this.dispose();
 			try {
 				new ListWord();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-		} else if (e.getSource() == b2) {
+		} else if (e.getSource() == btn2) {
 			this.dispose();
 			try {
 				new FindWord();
@@ -107,27 +107,27 @@ public class Menu extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 
-		} else if (e.getSource() == b3) {
+		} else if (e.getSource() == btn3) {
 			// Add a slang word
 			this.dispose();
 			new AddWord();
 
-		} else if (e.getSource() == b4) {
+		} else if (e.getSource() == btn4) {
 			this.dispose();
 			new RandomWord();
 
-		} else if (e.getSource() == b5) {
+		} else if (e.getSource() == btn5) {
 			this.dispose();
 			new HistoryShow();
 
-		} else if (e.getSource() == b6) {
+		} else if (e.getSource() == btn6) {
 			this.dispose();
 			try {
 				new DeleteWord();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-		} else if (e.getSource() == b7) {
+		} else if (e.getSource() == btn7) {
 			// default icon, custom title
 			int n = JOptionPane.showConfirmDialog(this, "Do you really want to reset Slang Word?", "An Inane Question",
 					JOptionPane.YES_NO_OPTION);
@@ -135,7 +135,7 @@ public class Menu extends JFrame implements ActionListener {
 				slangWord.reset();
 				JOptionPane.showMessageDialog(this, "Reset success.");
 			}
-		} else if (e.getSource() == b8) {
+		} else if (e.getSource() == btn8) {
 			this.dispose();
 			new Quiz();
 		}
