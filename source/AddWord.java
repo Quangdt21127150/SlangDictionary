@@ -8,7 +8,7 @@ import javax.swing.*;
 public class AddWord extends JFrame implements ActionListener {
 	SlangDictionary slangWord;
 	JButton btnBack, btnAdd;
-	JTextField textFieldMeaning, textFieldSlang;
+	JTextField newMeaningField, newWordField;
 
 	AddWord() {
 		// Get container & slang word
@@ -28,41 +28,42 @@ public class AddWord extends JFrame implements ActionListener {
 		// Form
 		JPanel form = new JPanel();
 
-		JPanel slagPanel = new JPanel();
+		JPanel slangPanel = new JPanel();
 		form.setBackground(Color.CYAN);
 		SpringLayout layout = new SpringLayout();
-		slagPanel.setLayout(layout);
-		JLabel labelForSlang = new JLabel("Slang word: ");
-		textFieldSlang = new JTextField("", 20);
-		labelForSlang.setPreferredSize(new Dimension(100, 20));
-		slagPanel.add(labelForSlang);
-		slagPanel.add(textFieldSlang);
+		slangPanel.setLayout(layout);
+		JLabel slangWordLabel = new JLabel("Slang word: ");
+		newWordField = new JTextField("", 20);
+		slangWordLabel.setPreferredSize(new Dimension(100, 20));
+		slangPanel.add(slangWordLabel);
+		slangPanel.add(newWordField);
+		
 		//Reference about SpringLayout: https://viettuts.vn/java-swing/springlayout-trong-java-swing
-		layout.putConstraint(SpringLayout.WEST, labelForSlang, 6, SpringLayout.WEST, slagPanel);
-		layout.putConstraint(SpringLayout.NORTH, labelForSlang, 6, SpringLayout.NORTH, slagPanel);
-		layout.putConstraint(SpringLayout.WEST, textFieldSlang, 6, SpringLayout.EAST, labelForSlang);
-		layout.putConstraint(SpringLayout.NORTH, textFieldSlang, 6, SpringLayout.NORTH, slagPanel);
-		layout.putConstraint(SpringLayout.EAST, slagPanel, 6, SpringLayout.EAST, textFieldSlang);
-		layout.putConstraint(SpringLayout.SOUTH, slagPanel, 6, SpringLayout.SOUTH, textFieldSlang);
+		layout.putConstraint(SpringLayout.WEST, slangWordLabel, 6, SpringLayout.WEST, slangPanel);
+		layout.putConstraint(SpringLayout.NORTH, slangWordLabel, 6, SpringLayout.NORTH, slangPanel);
+		layout.putConstraint(SpringLayout.WEST, newWordField, 6, SpringLayout.EAST, slangWordLabel);
+		layout.putConstraint(SpringLayout.NORTH, newWordField, 6, SpringLayout.NORTH, slangPanel);
+		layout.putConstraint(SpringLayout.EAST, slangPanel, 6, SpringLayout.EAST, newWordField);
+		layout.putConstraint(SpringLayout.SOUTH, slangPanel, 6, SpringLayout.SOUTH, newWordField);
 
 		JPanel meaningPanel = new JPanel();
 		SpringLayout layout1 = new SpringLayout();
 		meaningPanel.setLayout(layout1);
-		JLabel labelForMeaning = new JLabel("Meaning: ");
-		labelForMeaning.setPreferredSize(new Dimension(100, 20));
-		textFieldMeaning = new JTextField("", 20);
-		meaningPanel.add(labelForMeaning);
-		meaningPanel.add(textFieldMeaning);
-		layout1.putConstraint(SpringLayout.WEST, labelForMeaning, 6, SpringLayout.WEST, meaningPanel);
-		layout1.putConstraint(SpringLayout.NORTH, labelForMeaning, 6, SpringLayout.NORTH, meaningPanel);
-		layout1.putConstraint(SpringLayout.WEST, textFieldMeaning, 6, SpringLayout.EAST, labelForMeaning);
-		layout1.putConstraint(SpringLayout.NORTH, textFieldMeaning, 6, SpringLayout.NORTH, meaningPanel);
-		layout1.putConstraint(SpringLayout.EAST, meaningPanel, 6, SpringLayout.EAST, textFieldMeaning);
-		layout1.putConstraint(SpringLayout.SOUTH, meaningPanel, 6, SpringLayout.SOUTH, textFieldMeaning);
+		JLabel meaningLabel = new JLabel("Meaning: ");
+		meaningLabel.setPreferredSize(new Dimension(100, 20));
+		newMeaningField = new JTextField("", 20);
+		meaningPanel.add(meaningLabel);
+		meaningPanel.add(newMeaningField);
+		layout1.putConstraint(SpringLayout.WEST, meaningLabel, 6, SpringLayout.WEST, meaningPanel);
+		layout1.putConstraint(SpringLayout.NORTH, meaningLabel, 6, SpringLayout.NORTH, meaningPanel);
+		layout1.putConstraint(SpringLayout.WEST, newMeaningField, 6, SpringLayout.EAST, meaningLabel);
+		layout1.putConstraint(SpringLayout.NORTH, newMeaningField, 6, SpringLayout.NORTH, meaningPanel);
+		layout1.putConstraint(SpringLayout.EAST, meaningPanel, 6, SpringLayout.EAST, newMeaningField);
+		layout1.putConstraint(SpringLayout.SOUTH, meaningPanel, 6, SpringLayout.SOUTH, newMeaningField);
 
 		form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
 		con.add(Box.createRigidArea(new Dimension(0, 10)));
-		form.add(slagPanel);
+		form.add(slangPanel);
 		con.add(Box.createRigidArea(new Dimension(0, 10)));
 		form.add(meaningPanel);
 		
@@ -87,6 +88,7 @@ public class AddWord extends JFrame implements ActionListener {
 		con.add(form);
 		con.add(Box.createRigidArea(new Dimension(0, 10)));
 		con.add(bottomPanel);
+		
 		// Setting Frame
 		this.setTitle("Add Slang word");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,42 +99,43 @@ public class AddWord extends JFrame implements ActionListener {
 	}
 
 	@Override
+	//Reference about JOptionPane: https://viettuts.vn/java-swing/lop-joptionpane-trong-java-swing
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnBack) {
 			this.dispose();
 			new Menu();
 		} else if (e.getSource() == btnAdd) {
-			String slag = textFieldSlang.getText();
-			String meaning = textFieldMeaning.getText();
-			if (slag.isEmpty() || meaning.isEmpty()) {
+			String slang = newWordField.getText();
+			String meaning = newMeaningField.getText();
+			if (slang.isEmpty() || meaning.isEmpty()) {
 				// custom title, error icon
-				JOptionPane.showMessageDialog(this, "Slag and Meaning maybe empty", "Inane error",
+				JOptionPane.showMessageDialog(this, "Slang Word and Meaning maybe empty", "Inane error",
 						JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
-			if (slangWord.checkSlang(slag)) {
+			if (slangWord.checkSlang(slang)) {
 				// Duplicate or Overwrite
 				Object[] options = { "Overwrite", "Duplicate" };
 				int n = JOptionPane.showOptionDialog(this,
-						"Slang `" + slag + "` have already exist on  SlangWord  List", "A Silly Question",
+						"Slang `" + slang + "` have already exist on  SlangWord  List", "A Silly Question",
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 				if (n == 0) {
 					// Overwrite
-					slangWord.addOverwrite(slag, meaning);
+					slangWord.addOverwrite(slang, meaning);
 					JOptionPane.showMessageDialog(this, "Overwrite Slang Word Success.");
 				} else if (n == 1) {
 					// Duplicate
-					slangWord.addDuplicate(slag, meaning);
+					slangWord.addDuplicate(slang, meaning);
 					JOptionPane.showMessageDialog(this, "Dupilicate Slang Word Success.");
 				}
 			} else {
-				// Add new slag
-				slangWord.addNew(slag, meaning);
+				// Add new slang
+				slangWord.addNew(slang, meaning);
 				JOptionPane.showMessageDialog(this, "Adding new Slang Word Success.");
 			}
-			textFieldSlang.setText("");
-			textFieldMeaning.setText("");
+			newWordField.setText("");
+			newMeaningField.setText("");
 		}
 	}
 

@@ -35,7 +35,7 @@ public class ListWord extends JFrame implements ActionListener, TableModelListen
 		panelTable.setBackground(Color.black);
 		String[][] data = slangWord.getData();
 		dataCopy = slangWord.getData();
-		String[] column = { "No.", "Slag", "Meaning" };
+		String[] column = { "No.", "Slang Word", "Meaning" };
 		resultLabel.setText("We have " + data.length + " slang words");
 		jt = new JTable(data, column);
 		jt.setRowHeight(30);

@@ -35,7 +35,7 @@ public class DeleteWord extends JFrame implements ActionListener, ListSelectionL
 		JPanel panelTable = new JPanel();
 		panelTable.setBackground(Color.black);
 		data = slangWord.getData();
-		String[] column = { "No.", "Slag", "Meaning" };
+		String[] column = { "No.", "Slang Word", "Meaning" };
 		resultLabel.setText("We have " + data.length + " slang words");
 		jt = new JTable(new DefaultTableModel(column, 0));
 		model = (DefaultTableModel) jt.getModel();

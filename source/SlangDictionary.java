@@ -76,19 +76,19 @@ public class SlangDictionary {
 
 	public String[][] getData() {
 		String[][] s = new String[data.size()][3];
-		Set<String> slagListSet = data.keySet();
-		Object[] slagList = slagListSet.toArray();
+		Set<String> slangListSet = data.keySet();
+		Object[] slangList = slangListSet.toArray();
 		int index = 0;
 		for (int i = 0; i < data.size(); ++i) {
 			s[i][0] = String.valueOf(i);
-			s[i][1] = (String) slagList[index];
-			List<String> meaning = data.get(slagList[index]);
+			s[i][1] = (String) slangList[index];
+			List<String> meaning = data.get(slangList[index]);
 			s[i][2] = meaning.get(0);
 			for (int j = 1; j < meaning.size(); j++) {
 				if (i < data.size())
 					++i;
 				s[i][0] = String.valueOf(i);
-				s[i][1] = (String) slagList[index];
+				s[i][1] = (String) slangList[index];
 				s[i][2] = meaning.get(j);
 			}
 			++index;
@@ -110,45 +110,45 @@ public class SlangDictionary {
 		return s;
 	}
 
-	public void set(String slag, String oldValue, String newValue) {
-		List<String> meaning = data.get(slag);
+	public void set(String slang, String oldValue, String newValue) {
+		List<String> meaning = data.get(slang);
 		int index = meaning.indexOf(oldValue);
 		meaning.set(index, newValue);
 		this.saveFile();
 	}
 
-	public void saveHistory(String slag, String meaning) throws Exception {
+	public void saveHistory(String slang, String meaning) throws Exception {
 		File file1 = new File(FILE_HISTORY);
 		FileWriter fr = new FileWriter(file1, true);
-		fr.write(slag + "`" + meaning + "\n");
+		fr.write(slang + "`" + meaning + "\n");
 		fr.close();
 	}
 
 	public String[][] readHistory() {
-		List<String> historySlag = new ArrayList<>();
+		List<String> historySlang = new ArrayList<>();
 		List<String> historyDefinition = new ArrayList<>();
 		try {
 			Scanner scanner = new Scanner(new File(FILE_HISTORY));
 			scanner.useDelimiter("`");
 			String temp = scanner.next();
 			String[] part = scanner.next().split("\n");
-			historySlag.add(temp);
+			historySlang.add(temp);
 			historyDefinition.add(part[0]);
 			while (scanner.hasNext()) {
 				temp = part[1];
 				part = scanner.next().split("\n");
-				historySlag.add(temp);
+				historySlang.add(temp);
 				historyDefinition.add(part[0]);
 			}
 			scanner.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int size = historySlag.size();
+		int size = historySlang.size();
 		String[][] s = new String[size][3];
 		for (int i = 0; i < size; ++i) {
 			s[size - i - 1][0] = String.valueOf(size - i);
-			s[size - i - 1][1] = historySlag.get(i);
+			s[size - i - 1][1] = historySlang.get(i);
 			s[size - i - 1][2] = historyDefinition.get(i);
 		}
 		return s;
@@ -187,42 +187,42 @@ public class SlangDictionary {
 		}
 	}
 
-	public void delete(String slag, String value) {
-		List<String> meaningList = data.get(slag);
+	public void delete(String slang, String value) {
+		List<String> meaningList = data.get(slang);
 		int index = meaningList.indexOf(value);
 		if (meaningList.size() == 1) {
-			data.remove(slag);
+			data.remove(slang);
 		} else {
 			meaningList.remove(index);
-			data.put(slag, meaningList);
+			data.put(slang, meaningList);
 		}
 		this.saveFile();
 	}
 
-	public void addNew(String slag, String meaning) {
+	public void addNew(String slang, String meaning) {
 		List<String> meaningList = new ArrayList<>();
 		meaningList.add(meaning);
-		data.put(slag, meaningList);
+		data.put(slang, meaningList);
 		this.saveFile();
 	}
 
-	public void addDuplicate(String slag, String meaning) {
-		List<String> meaningList = data.get(slag);
+	public void addDuplicate(String slang, String meaning) {
+		List<String> meaningList = data.get(slang);
 		meaningList.add(meaning);
-		data.put(slag, meaningList);
+		data.put(slang, meaningList);
 		this.saveFile();
 	}
 
-	public void addOverwrite(String slag, String meaning) {
-		List<String> meaningList = data.get(slag);
+	public void addOverwrite(String slang, String meaning) {
+		List<String> meaningList = data.get(slang);
 		meaningList.set(0, meaning);
-		data.put(slag, meaningList);
+		data.put(slang, meaningList);
 		this.saveFile();
 	}
 
-	public boolean checkSlang(String slag) {
+	public boolean checkSlang(String slang) {
 		for (String keyIro : data.keySet()) {
-			if (keyIro.equals(slag))
+			if (keyIro.equals(slang))
 				return true;
 		}
 		return false;

@@ -58,7 +58,7 @@ public class FindWord extends JFrame implements ActionListener, TableModelListen
 		JPanel panelTable = new JPanel();
 		panelTable.setBackground(Color.black);
 
-		String[] column = { "No.", "Slag", "Meaning" };
+		String[] column = { "No.", "Slang Word", "Meaning" };
 
 		jt = new JTable(new DefaultTableModel(column, 0));
 		jt.setRowHeight(30);

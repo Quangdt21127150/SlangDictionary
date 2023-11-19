@@ -51,6 +51,7 @@ public class Quiz extends JFrame implements ActionListener {
 		con.add(Box.createRigidArea(new Dimension(0, 100)));
 		con.add(buttonPane);
 
+		//Setting Frame
 		this.setTitle("Quiz choose mode");
 		this.setVisible(true);
 		this.setSize(700, 700);

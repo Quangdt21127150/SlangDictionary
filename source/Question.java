@@ -70,6 +70,8 @@ public class Question extends JFrame implements ActionListener {
 		con.add(mainPanel);
 		con.add(Box.createRigidArea(new Dimension(0, 50)));
 		con.add(buttonPane);
+
+		//Setting Frame
 		this.setTitle("Question Quiz");
 		this.setVisible(true);
 		this.setSize(700, 700);
